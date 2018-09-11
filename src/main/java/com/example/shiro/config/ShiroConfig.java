@@ -3,9 +3,10 @@ package com.example.shiro.config;
 import com.google.common.collect.Maps;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+
     @Bean(name = "customRealm")
     public CustomRealm customRealm() {
         CustomRealm customRealm = new CustomRealm();
@@ -25,19 +27,29 @@ public class ShiroConfig {
         return customRealm;
     }
 
-
-
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager defaultWebSecurityManager(CustomRealm customRealm) {
         DefaultWebSecurityManager  securityManager = new DefaultWebSecurityManager ();
         securityManager.setRealm(customRealm);
+        securityManager.setSessionManager(customerWebSessionManager());
+//        securityManager.setSessionManager(defaultWebSessionManager());
         return securityManager;
     }
 
-//    @Bean(name = "lifecycleBeanPostProcessor")
-//    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-//        return new LifecycleBeanPostProcessor();
-//    }
+    @Bean(name = "sessionManager")
+    public DefaultWebSessionManager defaultWebSessionManager(){
+        DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
+        defaultWebSessionManager.setSessionDAO(redisSessionDao());
+//        defaultWebSessionManager.setSessionIdCookie(simpleCookie());
+//        defaultWebSessionManager.setSessionIdCookieEnabled(true);
+        return defaultWebSessionManager;
+    }
+
+
+    @Bean(name = "lifecycleBeanPostProcessor")
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
 
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager) {
@@ -79,5 +91,21 @@ public class ShiroConfig {
         return hashedCredentialsMatcher;
     }
 
+    @Bean(name = "redisSessionDao")
+    public RedisSessionDao redisSessionDao(){
+        return new RedisSessionDao();
+    }
+
+//    @Bean(name = "simpleCookie")
+//    public SimpleCookie simpleCookie(){
+//        SimpleCookie simpleCookie = new SimpleCookie();
+//        simpleCookie.setName("JSESSIONID");
+//        return simpleCookie;
+//    }
+
+    @Bean(name = "customerSessionManager")
+    public CustomerWebSessionManager customerWebSessionManager(){
+        return new CustomerWebSessionManager();
+    }
 
 }

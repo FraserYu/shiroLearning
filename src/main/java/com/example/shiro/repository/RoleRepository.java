@@ -2,13 +2,11 @@ package com.example.shiro.repository;
 
 
 import com.example.shiro.entity.Role;
-import com.example.shiro.entity.view.UserRoleView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Create by fraser on 2018/8/30 11:34 AM

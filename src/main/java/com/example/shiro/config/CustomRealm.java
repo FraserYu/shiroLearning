@@ -3,8 +3,6 @@ package com.example.shiro.config;
 import com.example.shiro.entity.Permission;
 import com.example.shiro.entity.Role;
 import com.example.shiro.entity.User;
-import com.example.shiro.entity.view.RolePermView;
-import com.example.shiro.entity.view.UserRoleView;
 import com.example.shiro.repository.PermissionRepository;
 import com.example.shiro.repository.RoleRepository;
 import com.example.shiro.repository.UserRepository;
@@ -17,7 +15,6 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**

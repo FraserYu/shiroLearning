@@ -2,9 +2,6 @@ package com.example.shiro.repository;
 
 
 import com.example.shiro.entity.Permission;
-import com.example.shiro.entity.Role;
-import com.example.shiro.entity.view.RolePermView;
-import com.example.shiro.entity.view.UserRoleView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
