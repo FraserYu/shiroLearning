@@ -5,7 +5,6 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +23,7 @@ public class ShiroConfig {
     public CustomRealm customRealm() {
         CustomRealm customRealm = new CustomRealm();
         customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        customRealm.setCachingEnabled(true);
         return customRealm;
     }
 
@@ -32,6 +32,7 @@ public class ShiroConfig {
         DefaultWebSecurityManager  securityManager = new DefaultWebSecurityManager ();
         securityManager.setRealm(customRealm);
         securityManager.setSessionManager(customerWebSessionManager());
+        securityManager.setCacheManager(redisCacheManagers());
 //        securityManager.setSessionManager(defaultWebSessionManager());
         return securityManager;
     }
@@ -109,5 +110,11 @@ public class ShiroConfig {
         customerWebSessionManager.setSessionDAO(redisSessionDao());
         return customerWebSessionManager;
     }
+
+    @Bean(name = "redisCacheManagers")
+    public RedisCacheManager redisCacheManagers(){
+        return new RedisCacheManager();
+    }
+
 
 }

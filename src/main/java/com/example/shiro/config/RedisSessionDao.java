@@ -9,6 +9,7 @@ import org.apache.shiro.session.mgt.eis.AbstractSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
@@ -20,10 +21,10 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class RedisSessionDao extends AbstractSessionDAO {
 
-    public static final String SESSION_PREFIX = "sessionId:";
+    public static final String SESSION_PREFIX = "shiro-sessionId:";
 
-    @Autowired
-    private RedisTemplate<Object, Object> redisTemplate;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
     private String getKey(String key){
         return (SESSION_PREFIX + key);
@@ -70,13 +71,13 @@ public class RedisSessionDao extends AbstractSessionDAO {
 
     @Override
     public Collection<Session> getActiveSessions() {
-        Set<Object> keys = redisTemplate.keys(SESSION_PREFIX + "*");
+        Set<String> keys = redisTemplate.keys(SESSION_PREFIX + "*");
         Set<Session> sessions = Sets.newHashSet();
         if (CollectionUtils.isEmpty(keys)){
             return sessions;
         }
 
-        for (Object key : keys){
+        for (String key : keys){
             sessions.add((Session) redisTemplate.opsForValue().get(key));
         }
         return sessions;

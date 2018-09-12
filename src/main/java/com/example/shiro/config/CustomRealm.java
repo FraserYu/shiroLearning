@@ -6,6 +6,7 @@ import com.example.shiro.entity.User;
 import com.example.shiro.repository.PermissionRepository;
 import com.example.shiro.repository.RoleRepository;
 import com.example.shiro.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 /**
  * Create by fraser on 2018/8/30 11:29 AM
  */
+@Slf4j
 public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
@@ -34,6 +36,7 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        log.info("read from db...");
         User user = (User) super.getAvailablePrincipal(principals);
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         List<Long> roleIds = roleRepository.findUserRole(user.getId());
