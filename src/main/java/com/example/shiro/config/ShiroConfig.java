@@ -105,7 +105,9 @@ public class ShiroConfig {
 
     @Bean(name = "customerSessionManager")
     public CustomerWebSessionManager customerWebSessionManager(){
-        return new CustomerWebSessionManager();
+        CustomerWebSessionManager customerWebSessionManager = new CustomerWebSessionManager();
+        customerWebSessionManager.setSessionDAO(redisSessionDao());
+        return customerWebSessionManager;
     }
 
 }
