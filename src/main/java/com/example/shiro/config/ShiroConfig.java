@@ -41,8 +41,6 @@ public class ShiroConfig {
     public DefaultWebSessionManager defaultWebSessionManager(){
         DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
         defaultWebSessionManager.setSessionDAO(redisSessionDao());
-//        defaultWebSessionManager.setSessionIdCookie(simpleCookie());
-//        defaultWebSessionManager.setSessionIdCookieEnabled(true);
         return defaultWebSessionManager;
     }
 
@@ -96,13 +94,6 @@ public class ShiroConfig {
     public RedisSessionDao redisSessionDao(){
         return new RedisSessionDao();
     }
-
-//    @Bean(name = "simpleCookie")
-//    public SimpleCookie simpleCookie(){
-//        SimpleCookie simpleCookie = new SimpleCookie();
-//        simpleCookie.setName("JSESSIONID");
-//        return simpleCookie;
-//    }
 
     @Bean(name = "customerSessionManager")
     public CustomerWebSessionManager customerWebSessionManager(){

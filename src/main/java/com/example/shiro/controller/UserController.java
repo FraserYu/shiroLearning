@@ -30,9 +30,6 @@ public class UserController {
     @Resource
     private MapperFacade mapperFacade;
 
-//    @Resource
-//    private ShiroSampleService shiroSampleService;
-
     @PostMapping
     public void register(@RequestBody UserVo userVo){
         String salt = RandomStringUtils.randomAlphanumeric(10);
@@ -60,7 +57,6 @@ public class UserController {
     @RequiresPermissions("user.delete")
     @GetMapping("/test")
     public void testVisit(){
-//        shiroSampleService.read();
         System.out.println("111");
     }
 }
