@@ -18,9 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Create by fraser on 2018/8/30 11:29 AM
- */
+
 @Slf4j
 public class CustomRealm extends AuthorizingRealm {
 

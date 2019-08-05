@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-/**
- * Create by fraser on 2018/9/10 4:12 PM
- */
+
 
 @Slf4j
 @RestController

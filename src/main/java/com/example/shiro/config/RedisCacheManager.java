@@ -6,9 +6,7 @@ import org.apache.shiro.cache.CacheManager;
 
 import javax.annotation.Resource;
 
-/**
- * Create by fraser on 2018/9/12 9:18 AM
- */
+
 public class RedisCacheManager implements CacheManager {
 
     @Resource

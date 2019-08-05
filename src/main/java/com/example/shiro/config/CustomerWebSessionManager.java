@@ -9,9 +9,7 @@ import org.apache.shiro.web.session.mgt.WebSessionKey;
 import javax.servlet.ServletRequest;
 import java.io.Serializable;
 
-/**
- * Create by fraser on 2018/9/11 4:38 PM
- */
+
 public class CustomerWebSessionManager extends DefaultWebSessionManager {
     @Override
     protected Session retrieveSession(SessionKey sessionKey) throws UnknownSessionException {

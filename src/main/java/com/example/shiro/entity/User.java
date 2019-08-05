@@ -5,9 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Create by fraser on 2018/8/31 4:00 PM
- */
+
 @Data
 @Entity
 public class User implements Serializable {

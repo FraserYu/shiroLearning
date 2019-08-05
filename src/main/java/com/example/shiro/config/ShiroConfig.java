@@ -12,31 +12,42 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
-/**
- * Create by fraser on 2018/8/30 11:19 AM
- */
+
 @Configuration
 public class ShiroConfig {
 
 
+    /**
+     * 自定义Realm
+     * @return
+     */
     @Bean(name = "customRealm")
     public CustomRealm customRealm() {
         CustomRealm customRealm = new CustomRealm();
-        customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        customRealm.setCredentialsMatcher(hashedCredentialsMatcher()); // 设置认证加密算法
         customRealm.setCachingEnabled(true);
         return customRealm;
     }
 
+    /**
+     * 定义Security manager
+     * @param customRealm
+     * @return
+     */
     @Bean(name = "securityManager")
     public DefaultWebSecurityManager defaultWebSecurityManager(CustomRealm customRealm) {
         DefaultWebSecurityManager  securityManager = new DefaultWebSecurityManager ();
         securityManager.setRealm(customRealm);
-        securityManager.setSessionManager(customerWebSessionManager());
-        securityManager.setCacheManager(redisCacheManagers());
+        securityManager.setSessionManager(customerWebSessionManager()); // 可不指定，Shiro会用默认Session manager
+        securityManager.setCacheManager(redisCacheManagers());  //可不指定，Shiro会用默认CacheManager
 //        securityManager.setSessionManager(defaultWebSessionManager());
         return securityManager;
     }
 
+    /**
+     * 定义session管理器
+     * @return
+     */
     @Bean(name = "sessionManager")
     public DefaultWebSessionManager defaultWebSessionManager(){
         DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
@@ -44,12 +55,20 @@ public class ShiroConfig {
         return defaultWebSessionManager;
     }
 
-
+    /**
+     * Shiro生命周期管理
+     * @return
+     */
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
 
+    /**
+     * 定义Shiro filter，Shiro核心内容
+     * @param securityManager
+     * @return
+     */
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -78,6 +97,10 @@ public class ShiroConfig {
         return defaultAdvisorAutoProxyCreator;
     }
 
+    /**
+     * 定义加密匹配算法
+     * @return
+     */
     @Bean(name="credentialsMatcher")
     public HashedCredentialsMatcher hashedCredentialsMatcher(){
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
@@ -90,11 +113,19 @@ public class ShiroConfig {
         return hashedCredentialsMatcher;
     }
 
+    /**
+     * 自定义RedisSessionDao用来管理Session在Redis中的CRUD
+     * @return
+     */
     @Bean(name = "redisSessionDao")
     public RedisSessionDao redisSessionDao(){
         return new RedisSessionDao();
     }
 
+    /**
+     * 自定义SessionManager,应用自定义SessionDao
+     * @return
+     */
     @Bean(name = "customerSessionManager")
     public CustomerWebSessionManager customerWebSessionManager(){
         CustomerWebSessionManager customerWebSessionManager = new CustomerWebSessionManager();
@@ -102,6 +133,10 @@ public class ShiroConfig {
         return customerWebSessionManager;
     }
 
+    /**
+     * 定义Redis缓存管理器
+     * @return
+     */
     @Bean(name = "redisCacheManagers")
     public RedisCacheManager redisCacheManagers(){
         return new RedisCacheManager();

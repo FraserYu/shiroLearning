@@ -14,10 +14,9 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
-/**
- * Create by fraser on 2018/9/10 4:12 PM
- */
+
 
 @Slf4j
 @RestController
@@ -43,7 +42,7 @@ public class UserController {
     @GetMapping("/login")
     public void login(String username, String password) {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-//        token.setRememberMe(true);
+        token.setRememberMe(true);
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.login(token);
     }
@@ -54,9 +53,12 @@ public class UserController {
         currentUser.logout();
     }
 
-    @RequiresPermissions("user.delete")
-    @GetMapping("/test")
-    public void testVisit(){
-        System.out.println("111");
+    @RequiresPermissions("user:list:view")
+    @GetMapping()
+    public void getAllUsers(){
+        List<User> users = userRepository.findAll();
     }
+
+//    @RequiresPermissions("user.list.view")
+
 }

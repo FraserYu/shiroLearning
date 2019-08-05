@@ -7,9 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * Create by fraser on 2018/8/31 4:00 PM
- */
+
 @Data
 @Entity
 public class RolePermRel {

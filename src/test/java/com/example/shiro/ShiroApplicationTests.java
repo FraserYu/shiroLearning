@@ -1,6 +1,5 @@
 package com.example.shiro;
 
-import com.example.shiro.entity.view.UserRoleView;
 import com.example.shiro.repository.RoleRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

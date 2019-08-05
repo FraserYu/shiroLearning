@@ -4,9 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-/**
- * Create by fraser on 2018/8/31 4:00 PM
- */
+
 @Data
 @Entity
 public class Role {

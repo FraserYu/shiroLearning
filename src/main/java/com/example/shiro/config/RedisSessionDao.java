@@ -14,9 +14,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Create by fraser on 2018/9/11 3:07 PM
- */
+
 @Slf4j
 public class RedisSessionDao extends AbstractSessionDAO {
 

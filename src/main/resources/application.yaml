@@ -1,6 +1,5 @@
 spring:
   datasource:
-#    url: jdbc:mysql://localhost:3306/shiro?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     url: jdbc:mysql://localhost:3306/shiro?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: "00000000"
@@ -49,3 +48,6 @@ orika:
   # Whether full field context should be captured (MapperFactoryBuilder#captureFieldContext(boolean)).
   # Follows Orika's behavior by default.
   captureFieldContext: false
+shiro:
+  enabled: true
+

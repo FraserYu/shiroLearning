@@ -9,9 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Create by fraser on 2018/8/30 11:34 AM
- */
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 

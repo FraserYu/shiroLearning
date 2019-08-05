@@ -11,9 +11,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Create by fraser on 2018/9/12 9:18 AM
- */
+
 @Slf4j
 @Component
 public class RedisCache<K, V> implements Cache<K, V> {
